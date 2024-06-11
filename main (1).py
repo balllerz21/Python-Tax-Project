@@ -35,6 +35,7 @@ def get_data_from_file(fn):
     return data
   else: 
     print("Error: csv file not found. Start Over!")
+    exit()
 
 def get_data_from_internet(url):
   ''' inputs: a url
@@ -544,6 +545,10 @@ def individual_questions(question_ID, csv_file, state_input, internet_file):
   elif(question_ID == 10):
     print(answer_header(10, question_labels))
     print(question10(state_input, csv_file))
+  else:
+    print( "Error: " + str(question_ID) + " is not an option.")
+    exit()
+    
   
 def program():
   print("Welcome to the Tax Analyzer\n")
@@ -561,8 +566,9 @@ def program():
       file_main(csv_tax_file, internet_file, state_input)
       user_input = file_question_output()
     if user_input == "N":
-      question_ID = int(input("Which question would you like answered? (1-3 are national based while 4-10 are state level questions)"))
+      question_ID = int(input("Which question would you like answered? (1-3 are national based while 4-10 are state level questions)\n"))
       individual_questions(question_ID, csv_tax_file,state_input, internet_file)
+      user_input = file_question_output()
   print("Goodbye :)")
 #calls
 program()
