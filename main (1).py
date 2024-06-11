@@ -84,7 +84,7 @@ def answer_header(question_number, question_labels):
  header += question_labels[question_number] + "\n"
  header += "="*60 + "\n"
  return header
- 
+                   
 #the headers that go with the questions
 question_labels = [
     "",
@@ -97,8 +97,7 @@ question_labels = [
     "percentage of returns with no taxable income per agi group",
     "average taxable income per resident",
     "percentage of returns for each agi_group",
-    "percentage of taxable income for each agi_group"
- ]
+    "percentage of taxable income for each agi_group"]
 
 #retrieving data from csv, internet, and json (Updated 2024: so now csv amd urls are user inputed. JSON stays the same as it doesn't )
 #csv_file_local = get_data_from_file(csv_file)
@@ -452,10 +451,9 @@ def charts_main(user_input, question3, question9, question10):
   pie_charts(user_input, question9, "The percentage of returns for each AGI in ", "1")
   pie_charts(user_input, question10, "The percentage of taxable income for each AGI in ", "2")
 
-def file_main(csv_file, url):
+def file_main(csv_file, url, user_input):
   #from lines 407 to 454 puts the answers into a file
   #user input
-  user_input = input("What state would you like tax info. on? ")
   f = open("answers" + user_input + ".txt", "w")
   #national level questions
 ###########################################
@@ -510,23 +508,61 @@ def file_main(csv_file, url):
   f.close()
 
   charts_main(user_input, question3(csv_file, url), question9(user_input, csv_file), question10(user_input, csv_file))
+  
+def file_question_output():
+  user_input = input("Would you like to see your answers all in a file answered all at once? (Y or N). Or if you would like to exit or restart the program, press X.\n")
+  return user_input
 
+def individual_questions(question_ID, csv_file, state_input, internet_file):
+  if (question_ID == 1):
+    print(answer_header(1, question_labels))
+    print(question1(csv_file))
+  elif(question_ID == 2):
+    print(answer_header(2, question_labels))
+    print(question2(csv_file))
+  elif(question_ID == 3):
+    print(answer_header(3, question_labels))
+    print(question3(csv_file, internet_file))
+  elif(question_ID == 4):
+    print(answer_header(4, question_labels))
+    print(question4(state_input, csv_file))
+  elif(question_ID == 5):
+    print(answer_header(5, question_labels))
+    print(question5(state_input, csv_file))
+  elif(question_ID == 6):
+    print(answer_header(6, question_labels))
+    print(question6(state_input, csv_file))
+  elif(question_ID == 7):
+    print(answer_header(7, question_labels))
+    print(question7(state_input, csv_file))
+  elif(question_ID == 8):
+    print(answer_header(8, question_labels))
+    print(question8(state_input, csv_file, internet_file))
+  elif(question_ID == 9):
+    print(answer_header(9, question_labels))
+    print(question9(state_input, csv_file))
+  elif(question_ID == 10):
+    print(answer_header(10, question_labels))
+    print(question10(state_input, csv_file))
+  
 def program():
   print("Welcome to the Tax Analyzer\n")
   print("This program analyzes tax data from any csv file that is formatted like the example files provided. The state population data is also analyzed from an online source similiar to the site given.")
   csv_tax_data = input("Pls enter a csv file for tax data.\nIf you don't have a csv file in mind, then just input the example file provided: ")
   url_pop = input("Pls enter an online source for state population.\nIf you don't have an online source, then just use the online source provided: ")
-  user_input = input("Would you like to see your answers all in a file answered all at once? (Y or N). Or if you would like to exit or restart the program, press X.\n")
+  state_input = input("What state would you like tax info. on? ")
+  user_input = file_question_output()
   csv_tax_file = get_data_from_file(csv_tax_data)
   internet_file = get_data_from_internet(url_pop)
-  while user_input != "Y" and user_input != "N":
-    user_input = input("Please enter (Y) for yes or (N) for No. To exit the program press X: ")
-  if user_input == "Y":
-      file_main(csv_tax_file, internet_file)
-      program()
-  if user_input == "N":
-    print("Let's do this ll")
-  if user_input == "X":
-    print("Goodbye :)")
+  if (user_input != "X" and user_input != "Y" and user_input != "N"):
+    print("Error: " + user_input + " is not a valid option"+ ". Program Ending.")
+  while user_input != "X":
+    if user_input == "Y":
+      file_main(csv_tax_file, internet_file, state_input)
+      user_input = file_question_output()
+    if user_input == "N":
+      question_ID = int(input("Which question would you like answered? (1-3 are national based while 4-10 are state level questions)"))
+      individual_questions(question_ID, csv_tax_file,state_input, internet_file)
+  print("Goodbye :)")
 #calls
 program()
