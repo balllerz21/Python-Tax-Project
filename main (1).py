@@ -511,7 +511,7 @@ def file_main(csv_file, url, user_input):
   charts_main(user_input, question3(csv_file, url), question9(user_input, csv_file), question10(user_input, csv_file))
   
 def file_question_output():
-  user_input = input("Would you like to see your answers all in a file answered all at once? (Y or N). Or if you would like to exit or restart the program, press X.\n")
+  user_input = input("Would you like to see your answers all in a file answered all at once?(This option also makes charts and graphs for some of the questions) (Y or N). Or if you would like to exit or restart the program, press X.\n")
   return user_input
 
 def individual_questions(question_ID, csv_file, state_input, internet_file):
@@ -547,9 +547,8 @@ def individual_questions(question_ID, csv_file, state_input, internet_file):
     print(question10(state_input, csv_file))
   else:
     print( "Error: " + str(question_ID) + " is not an option.")
-    exit()
     
-  
+#Updated 2024: made this program in order to run the user program. (Driver function)
 def program():
   print("Welcome to the Tax Analyzer\n")
   print("This program analyzes tax data from any csv file that is formatted like the example files provided. The state population data is also analyzed from an online source similiar to the site given.")
