@@ -525,24 +525,31 @@ def individual_questions(question_ID, csv_file, state_input, internet_file):
     print(answer_header(3, question_labels))
     print(question3(csv_file, internet_file))
   elif(question_ID == 4):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(4, question_labels))
     print(question4(state_input, csv_file))
   elif(question_ID == 5):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(5, question_labels))
     print(question5(state_input, csv_file))
   elif(question_ID == 6):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(6, question_labels))
     print(question6(state_input, csv_file))
   elif(question_ID == 7):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(7, question_labels))
     print(question7(state_input, csv_file))
   elif(question_ID == 8):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(8, question_labels))
     print(question8(state_input, csv_file, internet_file))
   elif(question_ID == 9):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(9, question_labels))
     print(question9(state_input, csv_file))
   elif(question_ID == 10):
+    print("Question for the state of " + get_state_name(json_file_local, state_input))
     print(answer_header(10, question_labels))
     print(question10(state_input, csv_file))
   else:
